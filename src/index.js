@@ -38,8 +38,12 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
-}
+  const chunks = expr.match(/.{1,10}/g);
+  const letters = chunks.map(letter => letter.slice(letter.indexOf('1')));
+  const morseChunks = letters.map(letter => letter.replace(/10/g, '.').replace(/11/g, '-'))
+
+  return morseChunks.map(chunk => chunk === '*' ? ' ' : MORSE_TABLE[chunk]).join('');
+} 
 
 module.exports = {
     decode
